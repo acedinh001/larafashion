@@ -85,5 +85,19 @@ return [
     */
 
     'livewire_loading_delay' => 'default',
+    'spa' => true,
+    'layout' => [
+        'sidebar' => [
+            'is_collapsible_on_desktop' => true,
+        ],
+    ],
+    'navigate' => true,
+    'inject_assets' => true,
+    'inject_morph_markers' => true,
+
+    'persistent_middleware' => [
+        'web',
+        'auth',
+    ],
 
 ];
