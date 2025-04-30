@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9351b9817d1a78408d6d72ccd0140fc9",
+    "content-hash": "06ba0e23edceeb83673e56489ba806eb",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -7421,16 +7421,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "11.12.7",
+            "version": "11.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "2ca2cd098c856b931f581c02593c06f01dc32a06"
+                "reference": "2435e90009c36906c33668d26c96c86acdb39af7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/2ca2cd098c856b931f581c02593c06f01dc32a06",
-                "reference": "2ca2cd098c856b931f581c02593c06f01dc32a06",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/2435e90009c36906c33668d26c96c86acdb39af7",
+                "reference": "2435e90009c36906c33668d26c96c86acdb39af7",
                 "shasum": ""
             },
             "require": {
@@ -7514,7 +7514,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.12.7"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/11.12.9"
             },
             "funding": [
                 {
@@ -7526,7 +7526,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-24T09:13:17+00:00"
+            "time": "2025-03-31T07:55:00+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
