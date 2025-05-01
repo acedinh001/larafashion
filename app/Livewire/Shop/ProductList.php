@@ -20,9 +20,17 @@ class ProductList extends Component
         'search' => ['except' => ''],
         'sortBy' => ['except' => 'latest'],
         'perPage' => ['except' => 12],
-        'view' => ['except' => 'grid'],
-        'category' => ['except' => '']
+        'viewMode' => ['except' => 'grid'],
+        'category' => ['except' => ''],
+        'priceMin' => ['except' => ''],
+        'priceMax' => ['except' => '']
     ];
+
+    public function mount()
+    {
+        $this->priceMin = Product::min('price') ?? 0;
+        $this->priceMax = Product::max('price') ?? 1000;
+    }
 
     public function updatingSearch()
     {
