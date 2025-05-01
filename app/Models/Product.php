@@ -45,7 +45,10 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->primaryImage?->image ?? 'default-product.jpg';
+        if ($this->primaryImage) {
+            return asset('storage/' . $this->primaryImage->image);
+        }
+        return asset('storage/default-product.jpg');
     }
 
     public function getSlugOptions(): SlugOptions

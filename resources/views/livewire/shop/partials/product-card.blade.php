@@ -2,8 +2,11 @@
     <div class="product__items">
         <div class="product__items--thumbnail">
             <a class="product__items--link" href="">
-                <img class="product__items--img product__primary--img" src="https://picsum.photos/seed/1/600/400" alt="{{ $product->name }}">
-                <img class="product__items--img product__secondary--img" src="https://picsum.photos/seed/1/600/400" alt="{{ $product->name }}">
+                <img class="product__items--img product__primary--img" src="{{ $product->getImageUrlAttribute() }}"
+                     alt="{{ $product->name
+                }}">
+                <img class="product__items--img product__secondary--img" src="{{ $product->getImageUrlAttribute() }}"
+                     alt="{{ $product->name }}">
             </a>
             @if($product->sale_price)
                 <div class="product__badge">

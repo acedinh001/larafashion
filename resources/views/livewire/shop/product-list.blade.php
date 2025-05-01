@@ -11,7 +11,7 @@
                             <div class="product__section--inner product__grid--inner">
                                 <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-2 mb--n30">
                                     @forelse($products as $product)
-                                        @include('livewire.shop.partials.product-list-item', ['product' => $product])
+                                        @include('livewire.shop.partials.product-card', ['product' => $product])
                                     @empty
                                         <p>No products found.</p>
                                     @endforelse
