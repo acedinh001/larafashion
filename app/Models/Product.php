@@ -33,10 +33,20 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-//    public function images()
-//    {
-//        return $this->hasMany(ProductImage::class);
-//    }
+    public function gallery()
+    {
+        return $this->hasMany(ProductGallery::class);
+    }
+
+    public function primaryImage()
+    {
+        return $this->hasOne(ProductGallery::class)->where('is_primary', true);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->primaryImage?->image ?? 'default-product.jpg';
+    }
 
     public function getSlugOptions(): SlugOptions
     {
