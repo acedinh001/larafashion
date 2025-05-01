@@ -41,8 +41,16 @@
                 </button>
             </form>
         </div>
+        <!-- Clear Filters -->
+        <div class="single__widget ">
+            <button wire:click="resetFilters" class="price__filter--btn primary__btn w-100">
+                Clear All Filters
+            </button>
+        </div>
     </div>
+
     <p class="product__showing--count">
         Showing {{ $products->firstItem() }}–{{ $products->lastItem() }} of {{ $products->total() }} results
     </p>
+
 </div>

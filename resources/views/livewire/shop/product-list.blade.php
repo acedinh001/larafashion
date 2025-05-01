@@ -3,7 +3,7 @@
     <div class="container-fluid">
         @include('livewire.shop.partials.top-filter')
         <div class="row">
-            @include('frontend.shop.partials.sidebar-filter')
+            @include('livewire.shop.partials.sidebar-filter')
             <div class="col-xl-9 col-lg-8">
                 <div class="shop__product--wrapper">
                     <div class="tab_content">

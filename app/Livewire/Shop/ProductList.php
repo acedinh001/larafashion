@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shop;
 
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,12 +16,16 @@ class ProductList extends Component
     public $perPage = 12;
     public $view = 'grid';
     public $category = '';
+    public $priceMin;
+    public $priceMax;
+    public $minPrice;
+    public $maxPrice;
 
     protected $queryString = [
         'search' => ['except' => ''],
         'sortBy' => ['except' => 'latest'],
         'perPage' => ['except' => 12],
-        'viewMode' => ['except' => 'grid'],
+        'view' => ['except' => 'grid'],
         'category' => ['except' => ''],
         'priceMin' => ['except' => ''],
         'priceMax' => ['except' => '']
@@ -28,44 +33,47 @@ class ProductList extends Component
 
     public function mount()
     {
-        $this->priceMin = Product::min('price') ?? 0;
-        $this->priceMax = Product::max('price') ?? 1000;
+        $minRegularPrice = Product::whereNull('sale_price')->min('price') ?? 0;
+        $minSalePrice = Product::whereNotNull('sale_price')->min('sale_price') ?? $minRegularPrice;
+        $this->minPrice = floor(min($minRegularPrice, $minSalePrice));
+
+        $maxRegularPrice = Product::whereNull('sale_price')->max('price') ?? 1000;
+        $maxSalePrice = Product::whereNotNull('sale_price')->max('sale_price') ?? $maxRegularPrice;
+        $this->maxPrice = ceil(max($maxRegularPrice, $maxSalePrice));
+
+        $this->priceMin = $this->minPrice;
+        $this->priceMax = $this->maxPrice;
     }
 
-    public function updatingSearch()
+    public function applyPriceFilter()
     {
+        $this->resetPage();
+    }
+
+    public function resetFilters()
+    {
+        $this->reset(['search', 'sortBy', 'category', 'priceMin', 'priceMax']);
         $this->resetPage();
     }
 
     public function render()
     {
-        $products = Product::query()
-            ->when($this->search, function($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
-            })
-            ->when($this->category, function($query) {
-                $query->where('category_id', $this->category);
-            })
-            ->when($this->sortBy, function($query) {
-                switch($this->sortBy) {
-                    case 'latest':
-                        $query->latest();
-                        break;
-                    case 'popularity':
-                        $query->orderBy('views', 'desc');
-                        break;
-                    case 'price_asc':
-                        $query->orderBy('price', 'asc');
-                        break;
-                    case 'price_desc':
-                        $query->orderBy('price', 'desc');
-                        break;
-                }
-            })
-            ->paginate($this->perPage);
+        $query = Product::query()
+            ->when($this->search, fn($q) => $q->where('name', 'like', "%{$this->search}%"))
+            ->when($this->category, fn($q) => $q->where('category_id', $this->category))
+            ->when($this->priceMin, fn($q) => $q->where('price', '>=', $this->priceMin))
+            ->when($this->priceMax, fn($q) => $q->where('price', '<=', $this->priceMax));
+
+        $query = match($this->sortBy) {
+            'latest' => $query->latest(),
+            'price_asc' => $query->orderBy('price'),
+            'price_desc' => $query->orderBy('price', 'desc'),
+            default => $query->latest()
+        };
 
         return view('livewire.shop.product-list', [
-            'products' => $products
+            'products' => $query->paginate($this->perPage),
+            'categories' => Category::withCount('products')->get()
         ]);
     }
 
