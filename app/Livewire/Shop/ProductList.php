@@ -4,6 +4,7 @@ namespace App\Livewire\Shop;
 
 use App\Models\Category;
 use App\Models\Product;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,18 +16,20 @@ class ProductList extends Component
     public $sortBy = 'latest';
     public $perPage = 12;
     public $view = 'grid';
-    public $category = '';
     public $priceMin;
     public $priceMax;
     public $minPrice;
     public $maxPrice;
+
+    public $selectedCategory = null;
+    public $openCategories = [];
 
     protected $queryString = [
         'search' => ['except' => ''],
         'sortBy' => ['except' => 'latest'],
         'perPage' => ['except' => 12],
         'view' => ['except' => 'grid'],
-        'category' => ['except' => ''],
+        'selectedCategory' => ['except' => null], // Add this line
         'priceMin' => ['except' => ''],
         'priceMax' => ['except' => '']
     ];
@@ -52,15 +55,59 @@ class ProductList extends Component
 
     public function resetFilters()
     {
-        $this->reset(['search', 'sortBy', 'category', 'priceMin', 'priceMax']);
+        $this->reset(['search', 'sortBy', 'selectedCategory', 'priceMin', 'priceMax']);
         $this->resetPage();
+    }
+
+    public function toggleCategory($categoryId)
+    {
+        if (isset($this->openCategories[$categoryId])) {
+            $this->openCategories = [];
+            return;
+        }
+
+        // Clear all open categories and set the new one
+        $this->openCategories = [$categoryId => true];
+    }
+
+    public function selectCategory($categoryId)
+    {
+        $this->selectedCategory = $categoryId;
+        $this->resetPage();
+    }
+
+    public function getCategoriesProperty()
+    {
+        $categories = Category::with(['children' => function ($query) {
+            $query->withCount('products');
+        }])
+            ->withCount(['products', 'children'])
+            ->has('children')
+            ->orderBy('name')
+            ->get();
+
+        // Sum child products count into each parent
+        $categories->each(function ($category) {
+            $category->children_products_count = $category->children->sum('products_count');
+        });
+
+        return $categories;
     }
 
     public function render()
     {
         $query = Product::query()
             ->when($this->search, fn($q) => $q->where('name', 'like', "%{$this->search}%"))
-            ->when($this->category, fn($q) => $q->where('category_id', $this->category))
+            ->when($this->selectedCategory, function($q) {
+                $category = Category::find($this->selectedCategory);
+                if ($category) {
+                    $categoryIds = collect([$category->id]);
+                    if (!$category->parent_id) {
+                        $categoryIds = $categoryIds->merge($category->children()->pluck('id'));
+                    }
+                    $q->whereIn('category_id', $categoryIds);
+                }
+            })
             ->when($this->priceMin, fn($q) => $q->where('price', '>=', $this->priceMin))
             ->when($this->priceMax, fn($q) => $q->where('price', '<=', $this->priceMax));
 
@@ -73,12 +120,8 @@ class ProductList extends Component
 
         return view('livewire.shop.product-list', [
             'products' => $query->paginate($this->perPage),
-            'categories' => Category::withCount('products')->get()
+            'categories' => $this->categories
         ]);
     }
 
-    public function toggleView($view)
-    {
-        $this->view = $view;
-    }
 }

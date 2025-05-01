@@ -11,6 +11,8 @@ class Category extends Model
 {
     use HasSlug, HasFactory;
 
+    protected $withCount = ['products'];
+
     protected $fillable = [
         'name',
         'description',
@@ -28,6 +30,11 @@ class Category extends Model
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? asset('storage/' . $this->image) : asset('assets/img/product/small-product1.png');
     }
 
     public function children()

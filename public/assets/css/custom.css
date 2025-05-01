@@ -15,3 +15,22 @@ button {
     overflow: hidden;
     aspect-ratio: 3/4; /* Maintains consistent aspect ratio */
 }
+
+
+.widget__categories--menu__arrowdown--icon {
+    transition: transform 0.5s ease;
+}
+
+.widget__categories--sub__menu {
+    display: none;
+    transition: all 0.5s ease;
+    opacity: 0;
+    height: 0;
+}
+
+.widget__categories--sub__menu.show {
+    display: block;
+    transition: all 0.5s ease;
+    opacity: 1;
+    height: auto;
+}
