@@ -1,10 +1,9 @@
 <div class="col mb-30">
     <div class="product__items">
         <div class="product__items--thumbnail">
-            <a class="product__items--link" href="">
+            <a class="product__items--link" href="{{ route('shop.show', $product) }}">
                 <img class="product__items--img product__primary--img" src="{{ $product->getImageUrlAttribute() }}"
-                     alt="{{ $product->name
-                }}">
+                     alt="{{ $product->name}}">
                 <img class="product__items--img product__secondary--img" src="{{ $product->getImageUrlAttribute() }}"
                      alt="{{ $product->name }}">
             </a>

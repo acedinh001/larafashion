@@ -98,24 +98,24 @@
                 <div class="footer__instagram footer__widget--inner">
                     <div class="footer__instagram--list d-flex">
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF3TLBTT7"><img src="assets/img/other/instagram1.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF3TLBTT7"><img src="{{ asset('assets/img/other/instagram1.webp') }}" alt="instagram"></a>
                         </div>
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF60sBxhN"><img src="assets/img/other/instagram2.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF60sBxhN"><img src="{{ asset('assets/img/other/instagram2.webp') }}" alt="instagram"></a>
                         </div>
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF90ZB6HG"><img src="assets/img/other/instagram3.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkF90ZB6HG"><img src="{{ asset('assets/img/other/instagram3.webp') }}" alt="instagram"></a>
                         </div>
                     </div>
                     <div class="footer__instagram--list d-flex">
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGAe6BQeu"><img src="assets/img/other/instagram4.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGAe6BQeu"><img src="{{ asset('assets/img/other/instagram4.webp') }}" alt="instagram"></a>
                         </div>
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGCWcBbv9"><img src="assets/img/other/instagram5.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGCWcBbv9"><img src="{{ asset('assets/img/other/instagram5.webp') }}" alt="instagram"></a>
                         </div>
                         <div class="instagram__thumbnail">
-                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGFDMhoid"><img src="assets/img/other/instagram6.webp" alt="instagram"></a>
+                            <a class="instagram__thumbnail--img" target="_blank" href="https://www.instagram.com/p/CZkGFDMhoid"><img src="{{ asset('assets/img/other/instagram6.webp') }}" alt="instagram"></a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
         <div class="footer__bottom d-flex justify-content-between align-items-center">
             <p class="copyright__content text-ofwhite m-0">Copyright © 2022 <a class="copyright__content--link" href="index.html">Suruchi</a> . All Rights Reserved.Design By Suruchi</p>
             <div class="footer__payment text-right">
-                <img class="display-block" src="assets/img/other/payment-visa-card.png" alt="visa-card">
+                <img class="display-block" src="{{ asset('assets/img/other/payment-visa-card.png') }}" alt="visa-card">
             </div>
         </div>
     </div>

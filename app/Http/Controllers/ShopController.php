@@ -22,6 +22,9 @@ class ShopController extends Controller
             'products' => $products,
             'featuredProducts' => $featuredProducts
         ]);
+    }
 
+    public function show(Product $product) {
+        return view('frontend.shop.show', compact('product'));
     }
 }
