@@ -51,6 +51,21 @@ class Product extends Model
         return asset('storage/default-product.jpg');
     }
 
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function createVariant(array $data)
+    {
+        return $this->variants()->create($data);
+    }
+
+    public function getActiveVariants()
+    {
+        return $this->variants()->where('is_active', true)->get();
+    }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
