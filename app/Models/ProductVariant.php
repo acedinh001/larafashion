@@ -25,12 +25,18 @@ class ProductVariant extends Model
         'is_active' => 'boolean'
     ];
 
-    protected $guarded = ['id'];
-
-    protected $hidden = ['created_at', 'updated_at'];
-
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function scopeInStock(Builder $query)
+    {
+        return $query->where('stock', '>', 0);
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('is_active', true);
     }
 }

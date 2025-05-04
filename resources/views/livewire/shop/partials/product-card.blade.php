@@ -16,7 +16,7 @@
         <div class="product__items--content">
             <span class="product__items--content__subtitle">{{ $product->category->name }}</span>
             <h3 class="product__items--content__title h4">
-                <a href="">{{ $product->name }}</a>
+                <a href="{{ route('shop.show', $product) }}">{{ $product->name }}</a>
             </h3>
             <div class="product__items--price">
                 <span class="current__price">${{ $product->sale_price ?? $product->price }}</span>

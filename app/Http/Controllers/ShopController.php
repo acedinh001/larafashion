@@ -25,6 +25,24 @@ class ShopController extends Controller
     }
 
     public function show(Product $product) {
-        return view('frontend.shop.show', compact('product'));
+        $product->load(['variants', 'gallery']);
+
+        $attributes = $product->variants->pluck('attributes');
+
+        $groupedAttributes = $attributes->reduce(function ($carry, $item) {
+            foreach ($item as $key => $value) {
+                $carry[$key][] = $value;
+            }
+            return $carry;
+        }, []);
+
+        $groupedAttributes = collect($groupedAttributes)->map(function ($values) {
+            return collect($values)->unique()->values()->all();
+        });
+
+        return view('frontend.shop.show', [
+            'product' => $product,
+            'attributes' => $groupedAttributes,
+        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers\GalleryRelationManager;
+use App\Filament\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -139,6 +140,7 @@ class ProductResource extends Resource
     {
         return [
             GalleryRelationManager::class,
+            VariantsRelationManager::class,
         ];
     }
 
