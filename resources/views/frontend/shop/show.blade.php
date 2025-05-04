@@ -273,7 +273,8 @@
                                     <div class="reviews__comment--area">
                                         <div class="reviews__comment--list d-flex">
                                             <div class="reviews__comment--thumb">
-                                                <img src="assets/img/other/comment-thumb1.png" alt="comment-thumb">
+                                                <img src="{{ asset('assets/img/other/comment-thumb1.png') }} "
+                                                     alt="comment-thumb">
                                             </div>
                                             <div class="reviews__comment--content">
                                                 <div class="reviews__comment--top d-flex justify-content-between">
@@ -360,7 +361,8 @@
                                         </div>
                                         <div class="reviews__comment--list margin__left d-flex">
                                             <div class="reviews__comment--thumb">
-                                                <img src="assets/img/other/comment-thumb2.png" alt="comment-thumb">
+                                                <img src="{{ asset('assets/img/other/comment-thumb2.png') }}"
+                                                     alt="comment-thumb">
                                             </div>
                                             <div class="reviews__comment--content">
                                                 <div class="reviews__comment--top d-flex justify-content-between">
@@ -447,7 +449,8 @@
                                         </div>
                                         <div class="reviews__comment--list d-flex">
                                             <div class="reviews__comment--thumb">
-                                                <img src="assets/img/other/comment-thumb3.png" alt="comment-thumb">
+                                                <img src="{{ asset('assets/img/other/comment-thumb3.png') }}"
+                                                     alt="comment-thumb">
                                             </div>
                                             <div class="reviews__comment--content">
                                                 <div class="reviews__comment--top d-flex justify-content-between">

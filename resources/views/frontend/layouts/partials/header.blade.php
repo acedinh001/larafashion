@@ -120,7 +120,7 @@
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
                 <a class="offcanvas__logo_link" href="index.html">
-                    <img src="{{ asset('assets/img/logo/nav-log2.png') }}} " alt="Grocee Logo" width="158" height="36">
+                    <img src="{{ asset('assets/img/logo/nav-log2.png') }}" alt="Grocee Logo" width="158" height="36">
                 </a>
                 <button class="offcanvas__close--btn" data-offcanvas="">close</button>
             </div>
