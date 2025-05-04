@@ -29,4 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
     galleryTop.on('slideChange', function () {
         galleryThumbs.slideTo(galleryTop.realIndex);
     });
+
+
 });
+
+
+

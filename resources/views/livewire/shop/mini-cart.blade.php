@@ -1,15 +1,12 @@
-<div class="offCanvas__minicart color-scheme-2">
-    <div class="minicart__header">
+<div wire:ignore.self class="offCanvas__minicart">
+    <div class="minicart__header ">
         <div class="minicart__header--top d-flex justify-content-between align-items-center">
-            <h2 class="minicart__title h3">Shopping Cart</h2>
+            <h2 class="minicart__title h3"> Shopping Cart</h2>
             <button class="minicart__close--btn" aria-label="minicart close button" data-offcanvas="">
-                <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                    <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                          stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                </svg>
+                <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path></svg>
             </button>
         </div>
-        <p class="minicart__header--desc">{{ $itemCount }} items in cart</p>
+        <p class="minicart__header--desc">Clothing and fashion products are limited</p>
     </div>
 
     <div class="minicart__product">
@@ -35,7 +32,8 @@
                             <span class="old__price">${{ number_format($item['price'], 2) }}</span>
                         @endif
                     </div>
-                    <div class="minicart__text--footer d-flex align-items-center" x-data="{ quantity: {{ $item['quantity'] }} }">
+                    <div class="minicart__text--footer d-flex align-items-center" x-data="{ quantity: {{
+                    $item['quantity'] }} }">
                         <div class="quantity__box minicart__quantity">
                             <button type="button" class="quantity__value decrease"
                                     @click="quantity > 1 ? quantity-- : null; $wire.updateQuantity('{{ $itemKey }}', 'decrease')"
