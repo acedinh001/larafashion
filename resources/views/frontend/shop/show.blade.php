@@ -3,8 +3,6 @@
 @section('title', 'Shop Left Sidebar - Suruchi Fashion')
 
 @section('content')
-    @include('frontend.shop.partials.breadcrumb')
-
     <!-- Start product details section -->
     <section class="product__details--section section--padding">
         <div class="container">
