@@ -3,7 +3,7 @@
          class="product__details--info">
         <h2 class="product__details--info__title mb-15">{{ $product->title }}</h2>
         <div class="product__details--info__price mb-10">
-            <span class="current__price" x-text="'$' + (salePrice ?? price)"></span>
+            <span class="current__price" x-text="'$' + (price ?? salePrice)"></span>
             @if($salePrice)
                 <span class="price__divided"></span>
                 <span class="old__price" x-text="'$' + salePrice"></span>
@@ -36,7 +36,7 @@
                         <legend class="product__variant--title mb-8">{{ ucfirst($attributeName) }}</legend>
                         @foreach ($values as $value)
                             <input id="{{ $attributeName }}-{{ $value }}" name="{{ $attributeName }}"
-                                   type="radio" wire:model.live.debounce.300ms="selectedAttributes.{{ $attributeName
+                                   type="radio" wire:model.live.debounce.100ms="selectedAttributes.{{ $attributeName
                                    }}" value="{{
                                    $value }}">
                             <label class="variant__size--value" for="{{ $attributeName }}-{{ $value }}"
@@ -45,22 +45,29 @@
                     </fieldset>
                 </div>
             @endforeach
-            <div class="product__variant--list quantity d-flex align-items-center mb-20">
+            <div class="product__variant--list quantity d-flex align-items-center mb-20"
+                 x-data="{ quantity: @entangle('quantity') }">
                 <div class="quantity__box">
                     <button type="button"
                             class="quantity__value quickview__value--quantity decrease"
-                            aria-label="quantity value" value="Decrease Value">-
-                    </button>
+                            x-on:click="if (quantity > 1) quantity--">-</button>
                     <label>
-                        <input type="number" class="quantity__number quickview__value--number"
-                               value="1">
+                        <input type="number"
+                               class="quantity__number quickview__value--number"
+                               x-model="quantity"
+                               readonly>
                     </label>
                     <button type="button"
                             class="quantity__value quickview__value--quantity increase"
-                            aria-label="quantity value" value="Increase Value">+
-                    </button>
+                            x-on:click="quantity++">+</button>
                 </div>
-                <button class="quickview__cart--btn primary__btn" type="submit">Add To Cart</button>
+                <button class="quickview__cart--btn primary__btn"
+                        type="button"
+                        wire:click="addToCartFromDetail"
+                        x-bind:disabled="quantity < 1"
+                        wire:loading.attr="disabled">
+                    <span>Add To Cart</span>
+                </button>
             </div>
             <div class="product__variant--list mb-15">
                 <a class="variant__wishlist--icon mb-15" href="wishlist.html"

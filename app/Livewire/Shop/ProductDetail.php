@@ -2,19 +2,23 @@
 
 namespace App\Livewire\Shop;
 
+use App\Livewire\Traits\WithCartFunctions;
 use Livewire\Component;
+use MongoDB\Driver\Session;
 
 class ProductDetail extends Component
 {
+    use WithCartFunctions;
+
     public $product;
     public $price;
     public $salePrice;
+    public $quantity = 1;
     public $selectedAttributes = [];
     public $productAttributes;
 
     public function mount($product)
     {
-        \Log::info('Mount method triggered');
         $this->product = $product;
         $this->price = $product->price;
         $this->salePrice = $product->sale_price;
@@ -31,6 +35,23 @@ class ProductDetail extends Component
             $this->price = $variant ? $variant->price : $this->product->price;
             $this->salePrice = $variant ? $variant->sale_price : $this->product->sale_price;
         }
+    }
+
+    public function increaseQuantity()
+    {
+        $this->quantity++;
+    }
+
+    public function decreaseQuantity()
+    {
+        if ($this->quantity > 1) {
+            $this->quantity--;
+        }
+    }
+
+    public function addToCartFromDetail()
+    {
+        $this->addToCart($this->product, $this->quantity, $this->selectedAttributes, $this->price, $this->salePrice);
     }
 
     public function render()
